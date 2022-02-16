@@ -7,7 +7,6 @@ export default function AddItems({ addItem }) {
     e.preventDefault();
     setItem('');
     addItem(item);
-    console.log(item);
   };
 
   return (

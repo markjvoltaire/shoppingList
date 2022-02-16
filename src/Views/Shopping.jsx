@@ -3,35 +3,57 @@ import { useReducer } from 'react';
 import AddItems from '../components/AddItems';
 import ItemsList from '../components/ItemsList';
 
-// 1st create initial State
 const initialItems = [{ id: 0, text: 'cookie' }];
 
-// 2nd create a reducer function
 function itemReducer(state, action) {
   switch (action.type) {
     case 'add': {
       return [...state, { id: state.length + 1, text: action.text }];
     }
+    case 'deleted': {
+      return state.filter((item) => item.id !== action.id);
+    }
+    default: {
+      throw Error(`Unkown action: ${action.type}`);
+    }
+    case 'edited': {
+      return state.map((item) => {
+        if (item.id === action.task.id) {
+          return action.task;
+        }
+        return item;
+      });
+    }
   }
 }
-console.log('useReducer', useReducer);
-
-// call useReducer Hook and pass in reducer function and the initial state
 export default function Shopping() {
   const [items, dispatch] = useReducer(itemReducer, initialItems);
-  console.log('itemReducer', itemReducer);
 
-  //
   const addItem = (text) => {
     dispatch({
       type: 'add',
       text,
     });
   };
+
+  const deleteItem = (stateId) => {
+    dispatch({
+      type: 'deleted',
+      id: stateId,
+    });
+  };
+
+  const editItem = (task) => {
+    dispatch({
+      type: 'edited',
+      task,
+    });
+  };
+
   return (
     <>
       <AddItems addItem={addItem} />
-      <ItemsList items={items} />
+      <ItemsList items={items} deleteItem={deleteItem} editItem={editItem} />
     </>
   );
 }
