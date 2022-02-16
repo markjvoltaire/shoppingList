@@ -12,26 +12,39 @@ function itemReducer(state, action) {
     case 'add': {
       return [...state, { id: state.length + 1, text: action.text }];
     }
+    case 'deleted': {
+      return state.filter((item) => item.id !== action.id);
+    }
+    default: {
+      throw Error(`Unkown action: ${action.type}`);
+    }
   }
 }
-console.log('useReducer', useReducer);
-
-// call useReducer Hook and pass in reducer function and the initial state
 export default function Shopping() {
+  // call useReducer Hook and pass in reducer function and the initial state
   const [items, dispatch] = useReducer(itemReducer, initialItems);
-  console.log('itemReducer', itemReducer);
 
-  //
+  // create dispatch to tell which reducer function to run
   const addItem = (text) => {
     dispatch({
       type: 'add',
       text,
     });
   };
+
+  const deleteItem = (stateId) => {
+    dispatch({
+      type: 'deleted',
+      id: stateId,
+    });
+  };
+
+  // pass function to components that needs it for a button
+  // pass state from useReducer function
   return (
     <>
       <AddItems addItem={addItem} />
-      <ItemsList items={items} />
+      <ItemsList items={items} deleteItem={deleteItem} />
     </>
   );
 }
