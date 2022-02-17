@@ -22,3 +22,26 @@ test('if user can add an item', () => {
 
   expect(item).toBeInTheDocument();
 });
+
+test('if user can delete item', () => {
+  render(<App />);
+
+  const textbox = screen.getByRole('textbox');
+
+  const submitButton = screen.getByRole('button', {
+    name: /submit/i,
+  });
+
+  userEvent.type(textbox, 'apple');
+  userEvent.click(submitButton);
+
+  const item = screen.getByText(/apple/i);
+
+  const deleteButton = screen.getAllByRole('button', {
+    name: /Delete/i,
+  });
+
+  userEvent.click(deleteButton);
+
+  expect(item).notToBeInTheDocument();
+});
