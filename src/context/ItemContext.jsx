@@ -2,7 +2,6 @@ import { createContext, useContext, useReducer } from 'react';
 
 const ItemContext = createContext();
 const initialItems = [{ id: 0, text: 'cookie' }];
-console.log(initialItems);
 
 function itemReducer(state, action) {
   switch (action.type) {

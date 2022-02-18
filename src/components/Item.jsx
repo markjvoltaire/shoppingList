@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function Item({ deleteItem, item, editItem, clear }) {
+export default function Item({ deleteItem, item, editItem }) {
   // create state thats going to control your conditionals
   const [editing, setEditing] = useState(false);
 
@@ -45,8 +45,6 @@ export default function Item({ deleteItem, item, editItem, clear }) {
       <button aria-label={`delete ${item.text}`} type="button" onClick={() => deleteItem(item.id)}>
         Delete
       </button>
-
-     
     </div>
   );
 }
