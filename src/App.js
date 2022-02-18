@@ -1,10 +1,15 @@
 import './App.css';
+import Header from './components/Header';
 import Shopping from './Views/Shopping';
+import { ItemProvider } from './context/ItemContext';
 
 function App() {
   return (
     <div>
-      <Shopping />
+      <ItemProvider>
+        <Header />
+        <Shopping />
+      </ItemProvider>
     </div>
   );
 }
