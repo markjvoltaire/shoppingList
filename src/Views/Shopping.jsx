@@ -28,7 +28,7 @@ import { useFood } from '../context/ItemContext';
 //   }
 // }
 export default function Shopping() {
-  const { items, addItem, deleteItem, editItem } = useFood();
+  const { items, addItem, deleteItem, editItem, clear } = useFood();
   // const [items, dispatch] = useReducer(itemReducer, initialItems);
 
   // const addItem = (text) => {
@@ -55,7 +55,7 @@ export default function Shopping() {
   return (
     <>
       <AddItems addItem={addItem} />
-      <ItemsList items={items} deleteItem={deleteItem} editItem={editItem} />
+      <ItemsList items={items} deleteItem={deleteItem} editItem={editItem} clear={clear} />
     </>
   );
 }

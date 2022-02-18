@@ -2,6 +2,7 @@ import { createContext, useContext, useReducer } from 'react';
 
 const ItemContext = createContext();
 const initialItems = [{ id: 0, text: 'cookie' }];
+console.log(initialItems);
 
 function itemReducer(state, action) {
   switch (action.type) {
@@ -18,6 +19,9 @@ function itemReducer(state, action) {
         }
         return item;
       });
+    }
+    case 'clear': {
+      return [];
     }
     default: {
       throw Error(`Unkown action: ${action.type}`);
@@ -49,8 +53,14 @@ const ItemProvider = ({ children }) => {
     });
   };
 
+  const clear = () => {
+    dispatch({
+      type: 'clear',
+    });
+  };
+
   return (
-    <ItemContext.Provider value={{ items, addItem, deleteItem, editItem }}>
+    <ItemContext.Provider value={{ items, addItem, deleteItem, editItem, clear }}>
       {children}
     </ItemContext.Provider>
   );
