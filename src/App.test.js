@@ -37,11 +37,9 @@ test('if user can delete item', () => {
 
   const item = screen.getByText(/apple/i);
 
-  const deleteButton = screen.getAllByRole('button', {
-    name: /Delete/i,
-  });
+  const deleteButton = screen.getByLabelText('delete apple');
 
   userEvent.click(deleteButton);
 
-  expect(item).notToBeInTheDocument();
+  expect(item).not.toBeInTheDocument();
 });

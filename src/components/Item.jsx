@@ -30,7 +30,9 @@ export default function Item({ deleteItem, item, editItem }) {
   } else {
     itemContent = (
       <>
-        <button onClick={() => setEditing(true)}>Edit</button>
+        <button aria-label={`edit ${item.text}`} onClick={() => setEditing(true)}>
+          Edit
+        </button>
       </>
     );
   }
@@ -40,7 +42,7 @@ export default function Item({ deleteItem, item, editItem }) {
   return (
     <div>
       {itemContent}
-      <button type="button" onClick={() => deleteItem(item.id)}>
+      <button aria-label={`delete ${item.text}`} type="button" onClick={() => deleteItem(item.id)}>
         Delete
       </button>
     </div>
