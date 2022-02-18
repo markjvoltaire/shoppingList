@@ -1,11 +1,14 @@
 import React from 'react';
+import Item from './Item';
 
-export default function ItemsList({ items }) {
-  console.log('items', items);
+export default function ItemsList({ items, deleteItem, editItem, clear }) {
   return (
     <div>
       {items.map((item) => (
-        <p key={item.id}>{item.text}</p>
+        <div key={item.id}>
+          <p>{item.text}</p>
+          <Item item={item} deleteItem={deleteItem} editItem={editItem} clear={clear} />
+        </div>
       ))}
     </div>
   );
